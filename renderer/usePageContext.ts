@@ -4,6 +4,8 @@
 import { inject } from 'vue'
 import type { App, InjectionKey } from 'vue'
 import { PageContext } from './types'
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 export { usePageContext }
 export { setPageContext }
@@ -18,4 +20,9 @@ function usePageContext() {
 
 function setPageContext(app: App, pageContext: PageContext) {
   app.provide(key, pageContext)
+
+  const pinia = createPinia()
+  pinia.use(piniaPluginPersistedstate)
+
+  app.use(pinia);
 }

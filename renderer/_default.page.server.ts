@@ -6,7 +6,7 @@ import { renderToString as renderToString_ } from '@vue/server-renderer'
 import type { App } from 'vue'
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server'
 import { createApp } from './app'
-import logoUrl from './logo.svg'
+import logoUrl from './logo.ico'
 import type { PageContextServer } from './types'
 
 async function render(pageContext: PageContextServer) {
@@ -23,7 +23,7 @@ async function render(pageContext: PageContextServer) {
   const desc = (documentProps && documentProps.description) || 'App using Vite + vite-plugin-ssr'
 
   const documentHtml = escapeInject`<!DOCTYPE html>
-    <html lang="en">
+    <html lang="fa" dir="rtl">
       <head>
         <meta charset="UTF-8" />
         <link rel="icon" href="${logoUrl}" />
