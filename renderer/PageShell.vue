@@ -59,6 +59,13 @@ body {
 a {
   text-decoration: none;
 }
+
+.Toastify{
+  font-size: small;
+  .Toastify__toast-container--top-right {
+    right: 0;
+  }
+}
 </style>
 
 <style scoped lang="scss">

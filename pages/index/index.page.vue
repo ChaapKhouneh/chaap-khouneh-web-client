@@ -31,7 +31,7 @@
       </path>
     </svg>
     <div class="rest">
-      <carousel :items-to-show="1" :autoplay="4000" dir="rtl" :wrapAround="true">
+      <carousel :items-to-show="1" :autoplay="5000" dir="rtl" :wrapAround="true">
         <slide v-for="slide in slides" :key="slide.id">
           <div class="slide-item">
             <div class="image-container">
@@ -58,26 +58,27 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { ORDER_STEP } from '../../assets/js/enums';
 import { useStore } from '../../state';
 import { ref, computed, onMounted } from 'vue';
+import fakeImage from '../../renderer/logo.avif';
 
 const slides = [
   {
-    image: "../renderer/logo.avif",
+    image: fakeImage,
     caption: "۱. سفارش رو شروع کنید",
   },
   {
-    image: "../renderer/logo.avif",
+    image: fakeImage,
     caption: "۲. اسنادتون رو بارگذاری کنید",
   },
   {
-    image: "../renderer/logo.avif",
+    image: fakeImage,
     caption: "۳. ویژگی‌های چاپ رو تنظیم کنید",
   },
   {
-    image: "../renderer/logo.avif",
+    image: fakeImage,
     caption: "۴. پرداخت کنید",
   },
   {
-    image: "../renderer/logo.avif",
+    image: fakeImage,
     caption: "۵. به کارهای دیگه‌تون برسید تا چاپ‌خونه از طریق پست، سفارش‌تون رو به دست‌تون برسونه ...",
   },
 ]
@@ -110,7 +111,7 @@ onMounted(() => {
 
   .actions {
     display: flex;
-    column-gap: 10px;
+    column-gap: 6px;
     margin-top: 20px;
     position: absolute;
 
