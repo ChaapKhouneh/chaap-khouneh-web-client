@@ -25,11 +25,13 @@
     </div>
   </header>
   <div class="inverted-content">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="">
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="">
       <path fill="#3189CE" fill-opacity="1"
         d="M0,32L60,37.3C120,43,240,53,360,58.7C480,64,600,64,720,101.3C840,139,960,213,1080,234.7C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
       </path>
-    </svg>
+    </svg> -->
+    <div id="wave">
+    </div>
     <div class="rest">
       <carousel :items-to-show="1" :autoplay="5000" dir="rtl" :wrapAround="true">
         <slide v-for="slide in slides" :key="slide.id">
@@ -85,6 +87,7 @@ const slides = [
 let store = undefined;
 const startOrder = () => {
   store.orderStep = ORDER_STEP.SELECT_FILES;
+  store.files = [];
   location.href = '/order';
 }
 const continueOrder = () => {
@@ -94,7 +97,9 @@ let hasIncompletedOrder = ref(false);
 onMounted(() => {
   store = useStore();
 
-  hasIncompletedOrder.value = store.orderStep !== ORDER_STEP.GREETINGS;
+  setTimeout(() => {
+    hasIncompletedOrder.value = store.orderStep !== ORDER_STEP.GREETINGS;
+  }, 1000);
 })
 </script>
 
@@ -114,6 +119,7 @@ onMounted(() => {
     column-gap: 6px;
     margin-top: 20px;
     position: absolute;
+    z-index: 1;
 
     .order-start {
       display: flex;
@@ -208,6 +214,39 @@ onMounted(() => {
   border-radius: 5px;
   overflow: hidden;
 
+  // #wave {
+  //   position: relative;
+  //   height: 70px;
+  //   width: 100%;
+  //   background: white;
+  //   transform: scaleX(-1);
+  // }
+
+  // #wave:before {
+  //   content: "";
+  //   display: block;
+  //   position: absolute;
+  //   border-radius: 100% 50%;
+  //   width: 54%;
+  //   height: 80px;
+  //   background-color: var(--color-primary);
+  //   right: -5px;
+  //   top: 40px;
+  // }
+
+  // #wave:after {
+  //   content: "";
+  //   display: block;
+  //   position: absolute;
+  //   border-radius: 100% 50%;
+  //   width: 54%;
+  //   height: 70px;
+  //   background-color: white;
+  //   left: -5px;
+  //   top: 27px;
+  // }
+
+
   svg {}
 
   .rest {
@@ -217,7 +256,7 @@ onMounted(() => {
     flex-basis: 0;
     flex-grow: 1;
     flex-shrink: 1;
-    padding-bottom: 40px;
+    padding: min(12vw, 100px) 0 40px 0;
 
     :deep(.carousel) {
       display: flex;

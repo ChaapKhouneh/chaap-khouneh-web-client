@@ -2,13 +2,14 @@
     <div class="smart-order-receiver">
         <header class="actions">
             <button class="button-primary" @click="addFile">+ افزودن سند جدید</button>
-            <button class="button-secondary">🗑</button>
+            <button class="button-secondary" @click="removeAllFiles">🗑</button>
         </header>
         <main class="orders-list">
-            orders
+            <SmartOrderReceiverItem v-for="file, index in files" :key="file.name + index" :file="file"
+                @remove-file="removeFile" />
         </main>
         <footer class="calculations">
-            calculations
+            <SmartOrderReceiverPrice />
         </footer>
     </div>
 </template>
@@ -18,15 +19,108 @@ import { useStore } from '../../../state';
 import selectFiles from 'select-files';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import { toBase64 } from '../../../assets/js/file';
+import { computed, onMounted, unref } from 'vue';
+import SmartOrderReceiverItem from './child-components/SmartOrderReceiverItem.vue';
+import SmartOrderReceiverPrice from './child-components/SmartOrderReceiverPrice.vue';
+// import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { convertDataURIToBinary } from '../../../assets/js/pdf/base64';
+import { BOUNDING_SIZE, COLOR_MODE, PAGE_SIZE } from '../../../assets/js/enums';
+import { getBoundingSize } from '../../../assets/js/monary';
 
 const store = useStore();
+const files = computed({
+    get() {
+        console.log(store.files);
+
+        return store.files;
+    },
+    set(value) {
+        store.files = value;
+    }
+})
 const addFile = () => {
-    selectFiles({ accept: 'image/*', capture: 'camera' }).then(files => {
-        console.log(files);
-        toast.info("آپلود شد", {
-            autoClose: 2000,
-        });
+    // const accept = 'image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx';
+    const accept = 'image/*,.pdf';
+    selectFiles({ accept, multiple: true }).then(async _files => {
+        if (_files && _files.length > 0) {
+            const convertedFiles: any = [];
+            for (const file of _files) {
+                const data = await toBase64(file);
+                const { preview, pageCount } = await calculatePageAdditionalData(file.type, data, file);
+                convertedFiles.push({
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    data,
+                    preview,
+                    pageCount,
+                    series: 1,
+                    pageSize: PAGE_SIZE.A4,
+                    colorMode: COLOR_MODE.BLACK_WHITE_LASER,
+                    double: false,
+                    bounding: false,
+                    description: '',
+                })
+            }
+            files.value.push(...convertedFiles);
+
+            toast.info(`تعداد ${convertedFiles.length} سند افزوده شد.`, {
+                autoClose: 2000,
+            });
+            console.log(convertedFiles);
+        }
+        else {
+            toast.warn(`هیچ سندی انتخاب نشده است.`, {
+                autoClose: 2000,
+            });
+        }
     });
+}
+
+const calculatePageAdditionalData = async (type, data, file) => {
+    if (type.startsWith('image/')) {
+        return { pageCount: 1, preview: data };
+    }
+    else if (type.startsWith('application/pdf')) {
+        var pdfAsArray = convertDataURIToBinary(data);
+
+        // const pdfDoc = await PDFDocument.load(pdfAsArray)
+        // const pages = pdfDoc.getPages()
+        // const firstPage = pages[0]
+        // const { width, height } = firstPage.getSize()
+        // const pageCount = pdfDoc.getPageCount();
+        // for (let index = 1; index < pageCount; index++) {
+        //     pdfDoc.removePage(1);
+        // }
+        // const preview = 'data:application/pdf;base64,' + await pdfDoc.saveAsBase64();
+        // return { pageCount, preview };
+        var reader = new FileReader();
+        const promise = new Promise((resolve, reject) => {
+            reader.onloadend = function () {
+                var count = reader.result.match(/\/Type[\s]*\/Page[^s]/g).length;
+                resolve(count);
+            }
+            reader.readAsBinaryString(file);
+        });
+        return { pageCount: await promise, preview: null }
+    }
+    else {
+        return { pageCount: 1, preview: null };
+    }
+}
+
+const removeAllFiles = () => {
+    if (confirm('آیا از حذف تمام اسناد مطمئن هستید؟')) {
+        files.value = [];
+    }
+}
+
+const removeFile = (fileToRemove) => {
+    fileToRemove = unref(fileToRemove);
+    if (confirm(`آیا از حذف سند "${fileToRemove.name}" مطمئن هستید؟`)) {
+        files.value = files.value.filter(_file => _file !== fileToRemove);
+    }
 }
 </script>
   
@@ -35,15 +129,17 @@ const addFile = () => {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    overflow: hidden;
+    margin-top: 10px;
 
     .actions {
         display: flex;
         flex-direction: row-reverse;
         column-gap: 10px;
-        margin-top: 10px;
         padding: 10px;
+        box-shadow: 0px 0px 20px -4px var(--color-primary);
+        z-index: 1;
 
-        // background-color: red;
         button {
             height: 35px;
             border: none;
@@ -67,13 +163,14 @@ const addFile = () => {
     }
 
     .orders-list {
-        flex-grow: 1;
-        // background-color: blue;
-        box-shadow: inset 0px 0px 20px -4px #3189CE;
+        flex: 0px 1 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 20px;
     }
 
     .calculations {
-        // background-color: red;
+        box-shadow: 0px 0px 20px -4px var(--color-primary);
     }
 }
 </style>

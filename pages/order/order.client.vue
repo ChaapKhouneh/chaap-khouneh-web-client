@@ -1,7 +1,7 @@
 <template>
     <div class="component-order-client">
-        <SmartStepper/>
-        <SmartOrderReciever/>
+        <SmartStepper />
+        <SmartOrderReciever />
     </div>
 </template>
 
@@ -14,9 +14,11 @@ import SmartOrderReciever from '../../components/smart/orderReceiver/SmartOrderR
 const store = useStore();
 console.log(store.orderStep);
 
-if (store.orderStep === ORDER_STEP.GREETINGS) {
-    location.href = '/';
-}
+setTimeout(() => {
+    if (store.orderStep === ORDER_STEP.GREETINGS) {
+        location.href = '/';
+    }
+}, 1000);
 </script>
   
 <style>

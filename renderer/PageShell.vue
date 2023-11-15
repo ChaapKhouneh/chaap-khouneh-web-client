@@ -39,6 +39,21 @@ import Link from './Link.vue'
   src: local('iranian-sans'), url("/fonts/iranian-sans.ttf") format('truetype');
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #eee;
+  // border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px white;
+  background-color: var(--color-primary);
+  border-radius: 100px;
+}
+
 body {
   margin: 0;
   font-family: 'iranian-sans';
@@ -60,8 +75,9 @@ a {
   text-decoration: none;
 }
 
-.Toastify{
+.Toastify {
   font-size: small;
+
   .Toastify__toast-container--top-right {
     right: 0;
   }

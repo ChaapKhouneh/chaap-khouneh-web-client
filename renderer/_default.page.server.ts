@@ -20,7 +20,7 @@ async function render(pageContext: PageContextServer) {
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext.exports
   const title = (documentProps && documentProps.title) || 'چاپ‌خونه | خدمات چاپ از خونه به خونه'
-  const desc = (documentProps && documentProps.description) || 'App using Vite + vite-plugin-ssr'
+  const desc = (documentProps && documentProps.description) || 'خدمات چاپ از خونه به خونه'
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="fa" dir="rtl">
