@@ -36,13 +36,13 @@
                             سیاه و سفید لیزری
                         </th>
                         <th>
-                            رنگی لیزری
+                            رنگی جوهرافشان
                         </th>
                         <th>
                             سیاه و سفید لیزری
                         </th>
                         <th>
-                            رنگی لیزری
+                            رنگی جوهر افشان
                         </th>
                     </tr>
                 </thead>
@@ -52,16 +52,25 @@
                             A5
                         </td>
                         <td>
-                            ۵۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A5][COLOR_MODE.BLACK_WHITE_LASER][PRINT_SIDE.ONE_SIDED])
+                            }}
+                            <small>تومان</small>
                         </td>
                         <td>
-                            ۱۸۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A5][COLOR_MODE.COLOR_INK][PRINT_SIDE.ONE_SIDED])
+                            }} <small>تومان</small>
                         </td>
                         <td>
-                            ۶۵۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A5][COLOR_MODE.BLACK_WHITE_LASER][PRINT_SIDE.TWO_SIDED])
+                            }} <small>تومان</small>
                         </td>
                         <td>
-                            ۲۵۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A5][COLOR_MODE.COLOR_INK][PRINT_SIDE.TWO_SIDED])
+                            }} <small>تومان</small>
                         </td>
                     </tr>
                     <tr>
@@ -69,16 +78,24 @@
                             A4
                         </td>
                         <td>
-                            ۸۵۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A4][COLOR_MODE.BLACK_WHITE_LASER][PRINT_SIDE.ONE_SIDED])
+                            }} <small>تومان</small>
                         </td>
                         <td>
-                            ۳۳۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A4][COLOR_MODE.COLOR_INK][PRINT_SIDE.ONE_SIDED])
+                            }} <small>تومان</small>
                         </td>
                         <td>
-                            ۱۱۵۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A4][COLOR_MODE.BLACK_WHITE_LASER][PRINT_SIDE.TWO_SIDED])
+                            }} <small>تومان</small>
                         </td>
                         <td>
-                            ۴۵۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A4][COLOR_MODE.COLOR_INK][PRINT_SIDE.TWO_SIDED])
+                            }} <small>تومان</small>
                         </td>
                     </tr>
                     <tr>
@@ -86,16 +103,24 @@
                             A3
                         </td>
                         <td>
-                            ۱۸۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A3][COLOR_MODE.BLACK_WHITE_LASER][PRINT_SIDE.ONE_SIDED])
+                            }} <small>تومان</small>
                         </td>
                         <td>
-                            ۷۰۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A3][COLOR_MODE.COLOR_INK][PRINT_SIDE.ONE_SIDED])
+                            }} <small>تومان</small>
                         </td>
                         <td>
-                            ۲۵۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A3][COLOR_MODE.BLACK_WHITE_LASER][PRINT_SIDE.TWO_SIDED])
+                            }} <small>تومان</small>
                         </td>
                         <td>
-                            ۱۰۰۰۰ <small>تومان</small>
+                            {{
+                                englishToPersianNumbers(rawPrices.print[PAGE_SIZE.A3][COLOR_MODE.COLOR_INK][PRINT_SIDE.TWO_SIDED])
+                            }} <small>تومان</small>
                         </td>
                     </tr>
                 </tbody>
@@ -105,6 +130,9 @@
 </template>
 
 <script lang="ts" setup>
+import { COLOR_MODE, PAGE_SIZE, PRINT_SIDE } from '../../assets/js/enums';
+import { rawPrices } from '../../assets/js/monary';
+import { englishToPersianNumbers } from '../../assets/js/translate';
 </script>
   
 <style lang="scss" scoped>
@@ -136,7 +164,7 @@
                     background-color: var(--color-primary);
                     color: #ffffff;
 
-                    th{
+                    th {
                         border: solid thin white;
                     }
 
@@ -171,9 +199,10 @@
                 }
 
                 td {
-                    small{
+                    small {
                         opacity: .5;
                     }
+
                     &:first-child {
                         color: white;
                         background-color: var(--color-primary);

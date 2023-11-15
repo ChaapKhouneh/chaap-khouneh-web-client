@@ -1,6 +1,6 @@
 import { PAGE_SIZE, COLOR_MODE, PRINT_SIDE, BOUNDING_SIZE } from './enums';
 
-const rawPrices = {
+export const rawPrices = {
     print: {
         [PAGE_SIZE.A5]: {
             [COLOR_MODE.BLACK_WHITE_LASER]: {
