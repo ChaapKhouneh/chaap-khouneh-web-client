@@ -1,6 +1,7 @@
 <template>
     <div class="smart-order-receiver">
         <header class="actions">
+            <h3 class="step-title">بارگزاری</h3>
             <button class="button-primary" @click="addFile">+ افزودن سند جدید</button>
             <button class="button-secondary" @click="removeAllFiles">🗑</button>
         </header>
@@ -134,11 +135,17 @@ const removeFile = (fileToRemove) => {
 
     .actions {
         display: flex;
-        flex-direction: row-reverse;
+        // flex-direction: row-reverse;
+        align-items: center;
         column-gap: 10px;
         padding: 10px;
         box-shadow: 0px 0px 20px -4px var(--color-primary);
         z-index: 1;
+
+        .step-title{
+            flex-grow: 1;
+            color: var(--color-primary);
+        }
 
         button {
             height: 35px;

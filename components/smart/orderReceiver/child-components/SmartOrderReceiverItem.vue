@@ -15,16 +15,16 @@
                     <small>عنوان سند</small>
                     {{ file.name }}
                 </p>
-                <p class="info-row">
+                <!-- <p class="info-row">
                     <small>حجم سند</small>
                     {{ englishToPersianNumbers(file.size) }}
-                </p>
+                </p> -->
                 <p class="info-row">
                     <small>تعداد صفحات</small>
                     {{ englishToPersianNumbers(file.pageCount) }}
                 </p>
                 <p class="info-row">
-                    <small>نوع سنده</small>
+                    <small>نوع سند</small>
                     {{ file.type }}
                 </p>
             </div>
@@ -44,8 +44,8 @@
                 <label class="type" :for="`type-${itemId}`">
                     حالت رنگی
                     <select :name="`type-${itemId}`" :id="`type-${itemId}`" v-model="file.colorMode">
-                        <option :value="0">سیاه و سفید</option>
-                        <option :value="1">رنگی</option>
+                        <option :value="0">سیاه و سفید لیزری</option>
+                        <option :value="2">رنگی جوهرافشان</option>
                     </select>
                 </label>
                 <label class="double" :for="`double-${itemId}`">

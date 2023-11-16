@@ -1,7 +1,8 @@
 <template>
     <div class="component-order-client">
         <SmartStepper />
-        <SmartOrderReciever />
+        <SmartOrderReciever v-if="store.orderStep === 1" />
+        <SmartOrderReview v-if="store.orderStep === 2" />
     </div>
 </template>
 
@@ -10,9 +11,9 @@ import { ORDER_STEP } from '../../assets/js/enums';
 import { useStore } from '../../state';
 import SmartStepper from '../../components/smart/stepper/SmartStepper.vue';
 import SmartOrderReciever from '../../components/smart/orderReceiver/SmartOrderReciever.vue';
+import SmartOrderReview from '../../components/smart/orderReview/SmartOrderReview.vue';
 
 const store = useStore();
-console.log(store.orderStep);
 
 setTimeout(() => {
     if (store.orderStep === ORDER_STEP.GREETINGS) {
