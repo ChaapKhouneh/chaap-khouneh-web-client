@@ -202,7 +202,6 @@ a {
   }
 
   .enamad{
-    background-color: red;
     position: absolute;
     left: 10px;
     bottom: 10px;
