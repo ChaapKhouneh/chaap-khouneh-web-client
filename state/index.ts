@@ -14,6 +14,8 @@ export const useStore = () => {
                 return {
                     orderStep: ORDER_STEP.GREETINGS,
                     files: [],
+                    addressInfo: {},
+                    paymentId: undefined,
                 }
             },
             // persist: {

@@ -7,6 +7,7 @@ import { PageContext } from './types'
 import { createPinia } from 'pinia'
 import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2';
 import localForage from "localforage";
+import debounce from 'debounce';
 
 export { usePageContext }
 export { setPageContext }
@@ -18,6 +19,8 @@ function usePageContext() {
   if (!pageContext) throw new Error('setPageContext() not called in parent')
   return pageContext
 }
+
+let stateDebouncer = {}
 
 function setPageContext(app: App, pageContext: PageContext) {
   app.provide(key, pageContext)
@@ -42,7 +45,20 @@ function setPageContext(app: App, pageContext: PageContext) {
         if (!localForgeReady) {
           makeLocalForgeReady();
         }
-        const x = await localForage.setItem(key, value)
+        if (!stateDebouncer[key]) {
+          stateDebouncer[key] = {
+            key,
+            value,
+            debouncer: debounce(async () => {
+              const x = await localForage.setItem(stateDebouncer[key].key, stateDebouncer[key].value)
+              console.log('oops');
+            }, 500),
+          }
+        }
+        else {
+          stateDebouncer[key].value = value;
+        }
+        const x = await stateDebouncer[key].debouncer();
         return x;
       },
       removeItem: async (key) => {

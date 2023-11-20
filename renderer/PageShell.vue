@@ -11,7 +11,7 @@
           چاپ‌خونه
         </span>
         <span class="subtitle">
-          خدمات چاپ - سریع، راحت، ارزان
+          خدمات چاپ - ارزان، مطلوب، آسان
         </span>
       </p>
     </div>
@@ -22,6 +22,12 @@
       <Link class="pricing" href="/pricing">تعرفه</Link>
       <Link class="order" href="/order">سفارش</Link>
       <Link class="about" href="/about">درباره</Link>
+    </div>
+    <div class="enamad">
+      <a referrerpolicy='origin' target='_blank'
+        href='https://trustseal.enamad.ir/?id=424851&Code=HyVRYgALuVKU3XuYtRwIaGI64oztbqDd'><img referrerpolicy='origin'
+          src='https://trustseal.enamad.ir/logo.aspx?id=424851&Code=HyVRYgALuVKU3XuYtRwIaGI64oztbqDd' alt=''
+          style='cursor:pointer' Code='HyVRYgALuVKU3XuYtRwIaGI64oztbqDd'></a>
     </div>
   </div>
 </template>
@@ -192,6 +198,19 @@ a {
     .about {
       margin-right: -15px;
       text-align: left;
+    }
+  }
+
+  .enamad{
+    background-color: red;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 50px;
+    height: 50px;
+
+    img{
+      max-width: 100%;
     }
   }
 }

@@ -2,23 +2,20 @@
     <div class="smart-order-receiver-price">
         <div class="properties">
             <p class="row">
-                <small>هزینهٔ چاپ</small> {{ englishToPersianNumbers(pricesComputed.print.cost) }} <small>({{
-                    englishToPersianNumbers(pricesComputed.print.count) }}
-                    صفحه)</small>
+                <small>هزینهٔ خدمات</small> {{ englishToPersianNumbers(pricesComputed.print.cost +
+                    pricesComputed.bounding.cost) }}
             </p>
             <p class="row">
-                <small>هزینهٔ صحافی</small> {{ englishToPersianNumbers(pricesComputed.bounding.cost) }} <small>({{
-                    englishToPersianNumbers(pricesComputed.bounding.count) }}
-                    عدد)</small>
+                <small>هزینهٔ ارسال</small> {{ englishToPersianNumbers(35000) }} <small></small>
             </p>
         </div>
         <div class="total">
             <p class="row">
-                <small>هزینهٔ کل خدمات</small> {{ englishToPersianNumbers(pricesComputed.print.cost +
-                    pricesComputed.bounding.cost) }}
+                <small>قابل پرداخت</small> {{ englishToPersianNumbers(pricesComputed.print.cost +
+                    pricesComputed.bounding.cost + 35000) }}
             </p>
             <button class="continue" @click="nextStep">
-                {{ continueTitle }} و ادامه
+                {{ continueTitle }} و پرداخت
             </button>
         </div>
     </div>

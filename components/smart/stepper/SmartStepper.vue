@@ -4,7 +4,7 @@
         <div class="steps-container">
             <div class="step-item" :class="{ passed: index < currentStep, active: index === currentStep }"
                 v-for="step, index in steps" :key="index">
-                {{ englishToPersianNumbers(index) }}
+                {{ englishToPersianNumbers(index + 1) }}
             </div>
         </div>
     </div>

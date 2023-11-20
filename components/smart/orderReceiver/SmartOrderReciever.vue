@@ -1,7 +1,7 @@
 <template>
     <div class="smart-order-receiver">
         <header class="actions">
-            <h3 class="step-title">بارگزاری</h3>
+            <h4 class="step-title">بارگزاری</h4>
             <button class="button-primary" @click="addFile">+ افزودن سند جدید</button>
             <button class="button-secondary" @click="removeAllFiles">🗑</button>
         </header>
@@ -10,7 +10,7 @@
                 @remove-file="removeFile" />
         </main>
         <footer class="calculations">
-            <SmartOrderReceiverPrice />
+            <SmartOrderReceiverPrice continueTitle="ثبت" />
         </footer>
     </div>
 </template>
