@@ -59,11 +59,11 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { ORDER_STEP } from '../../assets/js/enums';
 import { useStore } from '../../state';
-import { ref, computed, onMounted } from 'vue';
+import { ref, inject, onMounted } from 'vue';
 import fakeImage from '../../renderer/logo.avif';
-import loadingOverlay from 'vue-loading-overlay'
-const { useLoading } = loadingOverlay;
 import 'vue-loading-overlay/dist/css/index.css';
+
+const isLoading = inject('isLoading');
 
 const slides = [
   {
@@ -88,21 +88,16 @@ const slides = [
   },
 ]
 let store = undefined;
-const $loading = useLoading({
-  // options
-  isFullPage: true
-});
 
 const startOrder = () => {
-  const loader = $loading.show({
-    // Optional parameters
-  });
+  isLoading.value = true;
+
   store.orderStep = ORDER_STEP.SELECT_FILES;
   store.files = [];
 
   setTimeout(() => {
+    isLoading.value = false;
     location.href = '/order';
-    loader.hide()
   }, 1000);
 }
 const continueOrder = () => {

@@ -12,6 +12,7 @@ export const useStore = () => {
         _definedStore = defineStore('store', {
             state: () => {
                 return {
+                    isLoading: false,
                     orderStep: ORDER_STEP.GREETINGS,
                     files: [],
                     addressInfo: {},

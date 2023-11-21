@@ -22,13 +22,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import { calculatePrices } from '../../../../assets/js/monary';
 import { useStore } from '../../../../state';
 import { englishToPersianNumbers } from '../../../../assets/js/translate';
-import loadingOverlay from 'vue-loading-overlay'
-const { useLoading } = loadingOverlay;
 import 'vue-loading-overlay/dist/css/index.css';
+
+const isLoading = inject('isLoading');
 
 const { continueTitle } = defineProps(['continueTitle']);
 
@@ -38,17 +38,10 @@ const pricesComputed = computed(() => {
     return prices;
 })
 
-const $loading = useLoading({
-    // options
-    isFullPage: true
-});
-
 const nextStep = () => {
     // store.orderStep++;
 
-    const loader = $loading.show({
-        // Optional parameters
-    });
+    isLoading.value = true;
     // simulate AJAX
     const order = {
         files: store.files,
@@ -57,7 +50,7 @@ const nextStep = () => {
     console.log(order);
 
     setTimeout(() => {
-        loader.hide()
+        isLoading.value = false;
     }, 2000)
 }
 </script>

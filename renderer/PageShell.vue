@@ -30,10 +30,18 @@
           style='cursor:pointer' Code='HyVRYgALuVKU3XuYtRwIaGI64oztbqDd'></a>
     </div>
   </div>
+  <div class="loading-overlay" v-if="isLoading">
+    <p>
+      لطفا کمی صبر کنید ...
+    </p>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import Link from './Link.vue'
+import { provide, ref } from 'vue';
+import Link from './Link.vue';
+let isLoading = ref(false);
+provide('isLoading', isLoading);
 </script>
 
 <style lang="scss">
@@ -201,16 +209,38 @@ a {
     }
   }
 
-  .enamad{
+  .enamad {
     position: absolute;
     left: 10px;
     bottom: 10px;
     width: 50px;
     height: 50px;
 
-    img{
+    img {
       max-width: 100%;
     }
+  }
+}
+
+.loading-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #3189CE33;
+  color: var(--color-primary);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p{
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px;
+    border: solid thin white;
+    border-radius: 5px;
   }
 }
 </style>
