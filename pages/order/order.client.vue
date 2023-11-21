@@ -5,6 +5,7 @@
         <SmartOrderReciever v-if="store.orderStep === 1" />
         <SmartOrderReview v-else-if="store.orderStep === 2" />
         <SmartOrderAddress v-else-if="store.orderStep === 3" />
+        <SmartOrderPaymentRedirect v-else-if="store.orderStep === 4" />
         <!-- </Transition> -->
     </div>
 </template>
@@ -16,6 +17,7 @@ import SmartStepper from '../../components/smart/stepper/SmartStepper.vue';
 import SmartOrderReciever from '../../components/smart/orderReceiver/SmartOrderReciever.vue';
 import SmartOrderReview from '../../components/smart/orderReview/SmartOrderReview.vue';
 import SmartOrderAddress from '../../components/smart/orderAddress/SmartOrderAddress.vue';
+import SmartOrderPaymentRedirect from '../../components/smart/orderPaymentRedirect/SmartOrderPaymentRedirect.vue';
 
 const store = useStore();
 

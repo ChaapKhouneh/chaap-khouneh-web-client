@@ -26,6 +26,8 @@ import { computed } from 'vue';
 import { calculatePrices } from '../../../../assets/js/monary';
 import { useStore } from '../../../../state';
 import { englishToPersianNumbers } from '../../../../assets/js/translate';
+import { useLoading } from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/css/index.css';
 
 const { continueTitle } = defineProps(['continueTitle']);
 
@@ -35,8 +37,27 @@ const pricesComputed = computed(() => {
     return prices;
 })
 
+const $loading = useLoading({
+    // options
+    isFullPage: true
+});
+
 const nextStep = () => {
-    store.orderStep++;
+    // store.orderStep++;
+
+    const loader = $loading.show({
+        // Optional parameters
+    });
+    // simulate AJAX
+    const order = {
+        files: store.files,
+        addressInfo: store.addressInfo,
+    }
+    console.log(order);
+
+    setTimeout(() => {
+        loader.hide()
+    }, 2000)
 }
 </script>
 
