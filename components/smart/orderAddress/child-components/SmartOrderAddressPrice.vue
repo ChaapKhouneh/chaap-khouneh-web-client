@@ -26,7 +26,8 @@ import { computed } from 'vue';
 import { calculatePrices } from '../../../../assets/js/monary';
 import { useStore } from '../../../../state';
 import { englishToPersianNumbers } from '../../../../assets/js/translate';
-import { useLoading } from 'vue-loading-overlay'
+import loadingOverlay from 'vue-loading-overlay'
+const { useLoading } = loadingOverlay;
 import 'vue-loading-overlay/dist/css/index.css';
 
 const { continueTitle } = defineProps(['continueTitle']);

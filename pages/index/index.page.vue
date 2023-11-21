@@ -61,7 +61,8 @@ import { ORDER_STEP } from '../../assets/js/enums';
 import { useStore } from '../../state';
 import { ref, computed, onMounted } from 'vue';
 import fakeImage from '../../renderer/logo.avif';
-import { useLoading } from 'vue-loading-overlay'
+import loadingOverlay from 'vue-loading-overlay'
+const { useLoading } = loadingOverlay;
 import 'vue-loading-overlay/dist/css/index.css';
 
 const slides = [
