@@ -27,6 +27,8 @@ import { calculatePrices } from '../../../../assets/js/monary';
 import { useStore } from '../../../../state';
 import { englishToPersianNumbers } from '../../../../assets/js/translate';
 import 'vue-loading-overlay/dist/css/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const isLoading = inject('isLoading');
 
@@ -51,7 +53,10 @@ const nextStep = () => {
 
     setTimeout(() => {
         isLoading.value = false;
-    }, 2000)
+        toast.warn(`درگاه پرداخت در حال حاضر فعال نیست. لطفا از طریق ایتا یا بله سفارش خود را ثبت کنید.`, {
+            autoClose: 2000,
+        });
+    }, 1000)
 }
 </script>
 

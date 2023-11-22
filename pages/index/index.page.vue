@@ -62,6 +62,8 @@ import { useStore } from '../../state';
 import { ref, inject, onMounted } from 'vue';
 import fakeImage from '../../renderer/logo.avif';
 import 'vue-loading-overlay/dist/css/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const isLoading = inject('isLoading');
 
@@ -110,6 +112,10 @@ onMounted(() => {
   setTimeout(() => {
     hasIncompletedOrder.value = store.orderStep !== ORDER_STEP.GREETINGS;
   }, 500);
+
+  toast.warn(`در حال حاضر درگاه پرداخت سامانه فعال نیست. لطفا از طریق ایتا و بله سفارش خود را ثبت نمایید. (@chaapkhouneh_ir).`, {
+    autoClose: 20000,
+  });
 })
 </script>
 
