@@ -64,8 +64,6 @@ import fakeImage from '../../renderer/logo.avif';
 import 'vue-loading-overlay/dist/css/index.css';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import ApolloClient from 'apollo-boost';
-import gql from 'graphql-tag';
 
 const isLoading = inject('isLoading');
 
@@ -109,25 +107,8 @@ const continueOrder = () => {
 }
 let hasIncompletedOrder = ref(false);
 
-const client = new ApolloClient({
-  uri: '/api/graphql'
-});
-
 onMounted(async () => {
   store = useStore();
-
-  // const test = await client
-  //   .query({
-  //     query: gql`
-  //     query Query {
-  //       users {
-  //         name
-  //       }  
-  //     }
-  //   `,
-  //   });
-
-  // console.log({ test });
 
   watch(() => store.orderStep, (newValue, oldValue) => {
     hasIncompletedOrder.value = newValue !== ORDER_STEP.GREETINGS;
