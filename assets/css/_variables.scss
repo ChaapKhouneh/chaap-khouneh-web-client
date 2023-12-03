@@ -1,8 +1,8 @@
 :root {
-    --color-primary: #3189CE;
+    --color-primary: #8d61db;
     --color-primary-lighter: color-mix(in srgb,var(--color-primary),#fff 15%);
     --color-primary-lightest: color-mix(in srgb,var(--color-primary),#fff 30%);
     --color-primary-darker: color-mix(in srgb,var(--color-primary),#000 15%);
     --color-primary-darkest: color-mix(in srgb,var(--color-primary),#000 30%);
-    --color-secondary: #CE7631;
+    --color-secondary: #f1b730;
 }

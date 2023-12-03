@@ -52,7 +52,7 @@ function setPageContext(app: App, pageContext: PageContext) {
             debouncer: debounce(async () => {
               const x = await localForage.setItem(stateDebouncer[key].key, stateDebouncer[key].value)
               console.log('oops');
-            }, 500),
+            }, 1000),
           }
         }
         else {

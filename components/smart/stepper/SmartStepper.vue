@@ -68,7 +68,7 @@ const currentStep = computed(() => store.orderStep);
                 &::before {
                     content: '✔️';
                     position: absolute;
-                    filter: brightness(0) saturate(100%) invert(50%) sepia(55%) saturate(2863%) hue-rotate(183deg) brightness(89%) contrast(78%);
+                    filter: brightness(0) saturate(100%) invert(44%) sepia(94%) saturate(2221%) hue-rotate(233deg) brightness(91%) contrast(88%);
                 }
             }
         }

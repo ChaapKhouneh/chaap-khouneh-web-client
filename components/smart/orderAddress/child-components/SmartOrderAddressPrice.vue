@@ -29,6 +29,9 @@ import { englishToPersianNumbers } from '../../../../assets/js/translate';
 import 'vue-loading-overlay/dist/css/index.css';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import ApolloClient from 'apollo-boost';
+import gql from 'graphql-tag';
+import { COLOR_MODE, PAGE_SIZE } from '../../../../assets/js/enums';
 
 const isLoading = inject('isLoading');
 
@@ -40,7 +43,11 @@ const pricesComputed = computed(() => {
     return prices;
 })
 
-const nextStep = () => {
+const client = new ApolloClient({
+    uri: '/api/graphql'
+});
+
+const nextStep = async () => {
     // store.orderStep++;
 
     isLoading.value = true;
@@ -51,12 +58,67 @@ const nextStep = () => {
     }
     console.log(order);
 
-    setTimeout(() => {
-        isLoading.value = false;
-        toast.warn(`درگاه پرداخت در حال حاضر فعال نیست. لطفا از طریق ایتا یا بله سفارش خود را ثبت کنید.`, {
-            autoClose: 2000,
+    const { data: serverResponse } = await client
+        .mutate({
+            mutation: gql`
+                mutation Mutation($data: OrderCreateInput!) {
+                    createOrder(data: $data) {
+                        createdAt
+                        id
+                        paymentAuthority
+                        status
+                        totalPrice
+                    }
+                }
+            `,
+            variables:
+            {
+                "data": {
+                    "totalPrice": pricesComputed.value.print.cost + pricesComputed.value.bounding.cost + 35000,
+                    "AddressInfo": {
+                        "create": {
+                            "city": order.addressInfo.city,
+                            "mobileNumber": order.addressInfo.mobileNumber,
+                            "postalAddress": order.addressInfo.postalAddress,
+                            "postalCode": order.addressInfo.postalCode,
+                            "province": order.addressInfo.province,
+                        }
+                    },
+                    "Files": {
+                        "create": order.files.map((_file) => (
+                            {
+                                "bounding": _file.bounding,
+                                "colorMode": COLOR_MODE[_file.colorMode],
+                                "description": _file.description,
+                                "double": _file.double,
+                                "name": _file.name,
+                                "pageCount": _file.pageCount,
+                                "pageSize": PAGE_SIZE[_file.pageSize],
+                                "series": _file.series,
+                                "size": _file.size,
+                                "type": _file.type,
+                                "dataAsBase64": _file.data,
+                            }
+                        )),
+                    }
+                }
+            }
         });
-    }, 1000)
+
+    console.log(serverResponse);
+
+    Object.assign(store.orderInfo, serverResponse.createOrder);
+
+    isLoading.value = false;
+
+    store.orderStep++;
+
+    // setTimeout(() => {
+    //     isLoading.value = false;
+    //     toast.warn(`درگاه پرداخت در حال حاضر فعال نیست. لطفا از طریق ایتا یا بله سفارش خود را ثبت کنید.`, {
+    //         autoClose: 2000,
+    //     });
+    // }, 1000)
 }
 </script>
 

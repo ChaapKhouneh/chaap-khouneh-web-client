@@ -168,6 +168,7 @@ a {
     flex-shrink: 0;
     justify-content: center;
     margin-bottom: -35px;
+    z-index: 999;
 
     .order,
     .pricing,
@@ -228,7 +229,7 @@ a {
   top: 0px;
   width: 100vw;
   height: 100vh;
-  background-color: #3189CE33;
+  background-color: #8d61db33;
   color: var(--color-primary);
   z-index: 999;
   display: flex;

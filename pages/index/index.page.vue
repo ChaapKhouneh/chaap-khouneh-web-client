@@ -26,7 +26,7 @@
   </header>
   <div class="inverted-content">
     <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="">
-      <path fill="#3189CE" fill-opacity="1"
+      <path fill="#8d61db" fill-opacity="1"
         d="M0,32L60,37.3C120,43,240,53,360,58.7C480,64,600,64,720,101.3C840,139,960,213,1080,234.7C1200,256,1320,224,1380,208L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
       </path>
     </svg> -->
@@ -59,11 +59,13 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { ORDER_STEP } from '../../assets/js/enums';
 import { useStore } from '../../state';
-import { ref, inject, onMounted } from 'vue';
+import { ref, inject, onMounted, watch } from 'vue';
 import fakeImage from '../../renderer/logo.avif';
 import 'vue-loading-overlay/dist/css/index.css';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import ApolloClient from 'apollo-boost';
+import gql from 'graphql-tag';
 
 const isLoading = inject('isLoading');
 
@@ -106,17 +108,31 @@ const continueOrder = () => {
   location.href = '/order';
 }
 let hasIncompletedOrder = ref(false);
-onMounted(() => {
+
+const client = new ApolloClient({
+  uri: '/api/graphql'
+});
+
+onMounted(async () => {
   store = useStore();
 
-  setTimeout(() => {
-    hasIncompletedOrder.value = store.orderStep !== ORDER_STEP.GREETINGS;
-  }, 500);
+  // const test = await client
+  //   .query({
+  //     query: gql`
+  //     query Query {
+  //       users {
+  //         name
+  //       }  
+  //     }
+  //   `,
+  //   });
 
-  toast.warn(`در حال حاضر درگاه پرداخت سامانه فعال نیست. لطفا از طریق ایتا و بله سفارش خود را ثبت نمایید. (@chaapkhouneh_ir).`, {
-    autoClose: 20000,
-  });
-})
+  // console.log({ test });
+
+  watch(() => store.orderStep, (newValue, oldValue) => {
+    hasIncompletedOrder.value = newValue !== ORDER_STEP.GREETINGS;
+  }, { immediate: true });
+});
 </script>
 
 <style lang="scss" scoped>

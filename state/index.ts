@@ -16,9 +16,8 @@ export const useStore = () => {
                     orderStep: ORDER_STEP.GREETINGS,
                     files: [],
                     addressInfo: {},
-                    paymentInfo: {
-                        paymentId: undefined,
-                        // paymentState: PAYMENT_STATE.WAIT,
+                    orderInfo: {
+                        paymentAuthority: undefined,
                     },
                 }
             },
