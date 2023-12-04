@@ -6,25 +6,29 @@
         </header>
         <main class="orders-list">
             <form class="address-form">
+                <label for="full-name" class="field">
+                    <small>نام و نام خانوادگی</small>
+                    <input type="text" id="full-name" class="full-name" v-model.lazy="addressInfo.fullName" v-debounce="1000">
+                </label>
                 <label for="moblie-number" class="field">
                     <small>شماره تلفن همراه</small>
-                    <input type="text" id="moblie-number" class="moblie-number" v-model="addressInfo.mobileNumber">
+                    <input type="text" id="moblie-number" class="moblie-number" v-model.lazy="addressInfo.mobileNumber" v-debounce="1000">
                 </label>
                 <label for="postal-code" class="field">
                     <small>کد پستی</small>
-                    <input type="text" id="postal-code" class="postal-code" v-model="addressInfo.postalCode">
+                    <input type="text" id="postal-code" class="postal-code" v-model.lazy="addressInfo.postalCode" v-debounce="1000">
                 </label>
                 <label for="province" class="field">
                     <small>استان</small>
-                    <input type="text" id="province" class="province" v-model="addressInfo.province">
+                    <input type="text" id="province" class="province" v-model.lazy="addressInfo.province" v-debounce="1000">
                 </label>
                 <label for="city" class="field">
                     <small>شهر</small>
-                    <input type="text" id="city" class="city" v-model="addressInfo.city">
+                    <input type="text" id="city" class="city" v-model.lazy="addressInfo.city" v-debounce="1000">
                 </label>
                 <label for="postal-address" class="field">
                     <small>آدرس پستی</small>
-                    <textarea id="postal-address" class="postal-address" v-model="addressInfo.postalAddress"></textarea>
+                    <textarea id="postal-address" class="postal-address" v-model.lazy="addressInfo.postalAddress" v-debounce="1000"></textarea>
                 </label>
             </form>
         </main>

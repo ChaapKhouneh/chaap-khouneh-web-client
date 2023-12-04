@@ -77,6 +77,7 @@ const nextStep = async () => {
                     "totalPrice": pricesComputed.value.print.cost + pricesComputed.value.bounding.cost + 35000,
                     "AddressInfo": {
                         "create": {
+                            "fullName": order.addressInfo.fullName,
                             "city": order.addressInfo.city,
                             "mobileNumber": order.addressInfo.mobileNumber,
                             "postalAddress": order.addressInfo.postalAddress,

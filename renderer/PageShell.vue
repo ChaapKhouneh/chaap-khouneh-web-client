@@ -214,8 +214,9 @@ a {
     position: absolute;
     left: 10px;
     bottom: 10px;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
+    z-index: 1000;
 
     img {
       max-width: 100%;

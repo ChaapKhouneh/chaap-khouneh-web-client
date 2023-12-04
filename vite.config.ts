@@ -9,6 +9,8 @@ const config: UserConfig = {
   server: {
     proxy: {
       '/api': 'http://localhost:8080',
+      // '/api': 'https://panel.chaapkhouneh.ir',
+      // '/api': 'https://chaapkhouneh.ir',
     }
   }
 }

@@ -7,7 +7,8 @@ import { PageContext } from './types'
 import { createPinia } from 'pinia'
 import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2';
 import localForage from "localforage";
-import debounce from 'debounce';
+// import debounce from 'debounce';
+import debounce from 'v-debounce'
 
 export { usePageContext }
 export { setPageContext }
@@ -20,7 +21,7 @@ function usePageContext() {
   return pageContext
 }
 
-let stateDebouncer = {}
+// let stateDebouncer = {}
 
 function setPageContext(app: App, pageContext: PageContext) {
   app.provide(key, pageContext)
@@ -45,21 +46,22 @@ function setPageContext(app: App, pageContext: PageContext) {
         if (!localForgeReady) {
           makeLocalForgeReady();
         }
-        if (!stateDebouncer[key]) {
-          stateDebouncer[key] = {
-            key,
-            value,
-            debouncer: debounce(async () => {
-              const x = await localForage.setItem(stateDebouncer[key].key, stateDebouncer[key].value)
-              console.log('oops');
-            }, 1000),
-          }
-        }
-        else {
-          stateDebouncer[key].value = value;
-        }
-        const x = await stateDebouncer[key].debouncer();
-        return x;
+        // if (!stateDebouncer[key]) {
+        //   stateDebouncer[key] = {
+        //     key,
+        //     value,
+        //     debouncer: debounce(async () => {
+        //       const x = await localForage.setItem(stateDebouncer[key].key, stateDebouncer[key].value)
+        //       console.log('oops');
+        //     }, 1000),
+        //   }
+        // }
+        // else {
+        //   stateDebouncer[key].value = value;
+        // }
+        // const x = await stateDebouncer[key].debouncer();
+        // return x;
+        return await localForage.setItem(key, value);
       },
       removeItem: async (key) => {
         if (!localForgeReady) {
@@ -73,4 +75,6 @@ function setPageContext(app: App, pageContext: PageContext) {
   pinia.use((context) => installPersistedStatePlugin(context))
 
   app.use(pinia);
+
+  app.use(debounce);
 }

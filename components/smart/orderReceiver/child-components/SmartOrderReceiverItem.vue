@@ -31,7 +31,8 @@
             <div class="configurations">
                 <label class="series" :for="`series-${itemId}`">
                     سری
-                    <input type="number" :name="`series-${itemId}`" :id="`series-${itemId}`" v-model="file.series" />
+                    <input type="number" :name="`series-${itemId}`" :id="`series-${itemId}`" v-model.lazy="file.series"
+                        v-debounce="1000" />
                 </label>
                 <label class="size" :for="`size-${itemId}`">
                     اندازهٔ برگه
@@ -59,8 +60,8 @@
                 </label>
                 <label class="description" :for="`description-${itemId}`">
                     شرح
-                    <textarea :name="`description-${itemId}`" :id="`description-${itemId}`"
-                        v-model="file.description"></textarea>
+                    <textarea :name="`description-${itemId}`" :id="`description-${itemId}`" v-model.lazy="file.description"
+                        v-debounce="1000"></textarea>
                 </label>
             </div>
             <div class="actions">
