@@ -1,6 +1,4 @@
-<template>
-    test
-</template>
+<template></template>
 
 <script lang="ts" setup>
 const urlParams = new URLSearchParams(window.location.search);

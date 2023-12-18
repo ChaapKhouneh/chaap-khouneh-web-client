@@ -1,6 +1,7 @@
 <template>
     <div class="smart-order-payment-rediect">
-        <div class="line"></div>
+        <p>لطفا منتظر بمانید ...</p>
+        <!-- <div class="line"></div>
         <div class="content">
             <div class="start-description">
                 با توجه به اینکه هنوز درگاه به وب‌سایت چاپ‌خونه تعلق نگرفته است، لطفا مبلغ مورد نظر را کارت به کارت کنید.
@@ -63,7 +64,7 @@
                 لطفا بعد از پرداخت، شناسهٔ سفارش خود را به شناسهٔ @chaapkhouneh در ایتا یا بله ارسال کنید.
             </div>
             <button class="paid" @click="nextStep">پرداخت کردم (ادامه)</button>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -92,9 +93,8 @@ if (!paymentAuthority) {
     store.orderStep--;
 }
 else {
-    // location.href = `/pay?authority=${paymentAuthority}`;
-    console.log('so lets pay');
-
+    location.href = `/pay?authority=${paymentAuthority}`;
+    // console.log('so lets pay');
 }
 
 const nextStep = () => {
