@@ -40,6 +40,7 @@ import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
 import { englishToPersianNumbers } from '../../assets/js/translate';
 import { useStore } from '../../state';
+import { ORDER_STEP } from '../../assets/js/enums';
 
 const store = useStore();
 
@@ -93,10 +94,13 @@ onMounted(async () => {
     // 2.if is already paid, redirect to thanks
     else if (relatedOrder && relatedOrder.status !== 'WAITING_FOR_PAYMENT') {
         console.log('already paid, redirect to thanks');
+        store.orderStep = ORDER_STEP.THANKS;
+        location.href = '/order';
     }
     // 3.and if not found, redirect to order
     else {
         console.log('not found, redirect to order');
+        location.href = '/order';
     }
 
     isLoading.value = false;

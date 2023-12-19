@@ -96,6 +96,12 @@ export const calculatePrices = (files) => {
         const printingPages = file.double ? Math.ceil(file.pageCount / 2) : file.pageCount;
         const printCost = perPagePrintCost * printingPages;
 
+        if (file.double && file.pageCount % 2 != 0) {
+            // so decrease last page cost to one side
+            const oneSidedCost = rawPrices.print[file.pageSize][file.colorMode][PRINT_SIDE.ONE_SIDED];
+            printCost = printCost - perPagePrintCost + oneSidedCost;
+        }
+
         print.count += file.pageCount;
         print.cost += printCost;
 
