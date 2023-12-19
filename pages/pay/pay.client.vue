@@ -85,14 +85,14 @@ onMounted(async () => {
             }
         })).data?.orders?.[0];
 
-    console.log({ relatedOrder });
+    console.log({ r: relatedOrder.value });
     // 1.if found and is waiting for pay, continue
-    if (relatedOrder && relatedOrder.status === 'WAITING_FOR_PAYMENT') {
+    if (relatedOrder.value && relatedOrder.value.status === 'WAITING_FOR_PAYMENT') {
         console.log('so lets pay');
         // double set: state, authority, ... (if needed)
     }
     // 2.if is already paid, redirect to thanks
-    else if (relatedOrder && relatedOrder.status !== 'WAITING_FOR_PAYMENT') {
+    else if (relatedOrder.value && relatedOrder.value.status !== 'WAITING_FOR_PAYMENT') {
         console.log('already paid, redirect to thanks');
         store.orderStep = ORDER_STEP.THANKS;
         location.href = '/order';
