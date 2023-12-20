@@ -212,7 +212,7 @@ a {
 
   .enamad {
     position: absolute;
-    left: 10px;
+    right: 10px;
     bottom: 10px;
     width: 70px;
     height: 70px;
@@ -237,7 +237,7 @@ a {
   justify-content: center;
   align-items: center;
 
-  p{
+  p {
     background-color: var(--color-primary);
     color: white;
     padding: 20px;

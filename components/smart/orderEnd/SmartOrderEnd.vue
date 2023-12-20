@@ -2,8 +2,8 @@
     <div class="smart-order-end">
         <img src="/img/delivery.png" alt="">
         <p>از خرید شما سپاسگزاریم.</p>
-        <p>منتظر تماس (پیام) همکاران ما باشید.</p>
         <p>در سریع‌ترین زمان ممکن، سفارش شما را به دست‌تان می‌رسانیم.</p>
+        <p>در صورت نیاز می‌توانید از طریق شناسهٔ <span class="address">@chaapkhouneh</span> در ایتا و بله با ما در ارتباط باشید.</p>
         <div class="payment-authority">
             <small>شناسهٔ سفارش</small> {{ paymentAuthority }}
         </div>
@@ -59,6 +59,19 @@ const exitOrder = () => {
         filter: brightness(0) saturate(100%) invert(44%) sepia(94%) saturate(2221%) hue-rotate(233deg) brightness(91%) contrast(88%);
     }
 
+    p {
+        text-align: center;
+        line-height: 26px;
+
+        .address{
+            direction: ltr;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+    }
+
     .payment-authority {
         border: solid thin var(--color-primary);
         color: var(--color-primary);
@@ -76,6 +89,7 @@ const exitOrder = () => {
         background-color: var(--color-secondary);
         color: #fff;
         font-weight: 700;
+        flex-shrink: 0;
     }
 
     .exit {
@@ -88,6 +102,7 @@ const exitOrder = () => {
         border: solid thin var(--color-secondary);
         color: var(--color-secondary);
         font-weight: 700;
+        flex-shrink: 0;
     }
 }
 </style>
